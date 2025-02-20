@@ -1,9 +1,6 @@
 # Responsive Website
 
-## Tutorial
-
-Watch how I built this website on YouTube:
-
+## Preview
 ![Banner](preview.png)
 
 ## Stack
