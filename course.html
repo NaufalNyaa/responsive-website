@@ -35,7 +35,7 @@
     <section class="course">
         <h1>Courses we offer</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        
+
         <div class="row">
             <div class="course-col">
                 <h3>Intermediate</h3>
@@ -50,7 +50,7 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum esse inventore reiciendis voluptate, sapiente, perspiciatis minima et debitis dignissimos harum nisi ex? Odit non perspiciatis adipisci. Dicta nisi, cupiditate alias. </p>
             </div>
         </div>
-    
+
      </section>
 
  <!-- facilities -->
@@ -95,13 +95,61 @@
 
 <!-----Javascript for Toggle menu----->
     <script>
-        var navlinks = document.getElementById("navlinks");
-        function showmenu(){
-            navlinks.style.right = "0";
-        }
-        function hidemenu(){
-            navlinks.style.right = "-200px";
-        }
+        // Script navigasi mobile yang ditingkatkan
+var navlinks = document.getElementById("navlinks");
+var menuItems = document.querySelectorAll(".nav-links ul li");
+
+function showmenu(){
+    navlinks.style.right = "0";
+    navlinks.classList.add("show");
+    document.body.style.overflow = "hidden"; // Mencegah scrolling saat menu terbuka
+
+    // Menambahkan delay animasi untuk setiap item menu
+    menuItems.forEach(function(item, index) {
+        item.style.setProperty('--i', index + 1);
+        item.style.animation = "slideIn 0.5s forwards";
+        item.style.animationDelay = (0.1 * (index + 1)) + "s";
+    });
+}
+
+function hidemenu(){
+    navlinks.style.right = "-200px";
+    navlinks.classList.remove("show");
+    document.body.style.overflow = "auto"; // Mengaktifkan kembali scrolling saat menu ditutup
+
+    // Reset animasi item menu
+    menuItems.forEach(function(item) {
+        item.style.animation = "none";
+        item.style.opacity = "0";
+    });
+}
+
+// Menutup menu mobile saat mengklik link
+document.querySelectorAll('.nav-links ul li a').forEach(item => {
+  item.addEventListener('click', event => {
+    if(window.innerWidth <= 700) {
+      hidemenu();
+    }
+  });
+});
+
+// Menangani event resize window untuk memperbaiki navigasi
+window.addEventListener('resize', function() {
+  if(window.innerWidth > 700) {
+    navlinks.style.right = "0";
+    document.body.style.overflow = "auto";
+
+    // Reset tampilan item menu pada layar besar
+    menuItems.forEach(function(item) {
+        item.style.opacity = "1";
+        item.style.animation = "none";
+    });
+  } else {
+    if (!navlinks.classList.contains("show")) {
+        navlinks.style.right = "-200px";
+    }
+  }
+});
     </script>
 
 
