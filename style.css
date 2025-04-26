@@ -478,28 +478,256 @@ h3{
     margin-right: 30px;
 }
 
+/* CSS tambahan untuk responsif yang perlu ditambahkan ke file style.css Anda */
 
+/* Perbaikan responsif umum */
+* {
+    box-sizing: border-box;
+  }
 
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 
+  /* Layout responsif yang lebih baik untuk semua bagian */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
 
+  .course-col, .facilities-col, .campus-cole, .testimonial-col, .about-col, .blog-left, .blog-right, .contact-col {
+    flex: 1 1 300px;
+  }
 
+  /* Perbaikan untuk layar kecil */
+  @media(max-width: 900px) {
+    .row {
+      justify-content: center;
+    }
 
+    .course-col, .facilities-col, .campus-cole, .testimonial-col {
+      flex-basis: 45%;
+    }
+  }
 
+  @media(max-width: 700px) {
+    .text-box h1 {
+      font-size: 30px;
+    }
 
+    .course-col, .facilities-col, .campus-cole, .testimonial-col, .about-col, .blog-left, .blog-right, .contact-col {
+      flex-basis: 100%;
+    }
 
+    .testimonial-col {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
 
+    .testimonial-col img {
+      margin: 0 0 15px 0;
+    }
 
+    .testimonial-col h3, .facilities-col h3 {
+      text-align: center;
+    }
 
+    .cta h1 {
+      font-size: 24px;
+    }
 
+    .sub-header h1 {
+      margin-top: 50px;
+      font-size: 24px;
+    }
+  }
 
+  /* Layar sangat kecil */
+  @media(max-width: 480px) {
+    nav {
+      padding: 2% 4%;
+    }
 
+    .text-box h1 {
+      font-size: 24px;
+    }
 
+    .text-box p {
+      font-size: 12px;
+    }
 
+    .hero-btn {
+      padding: 8px 20px;
+      font-size: 12px;
+    }
 
+    h1 {
+      font-size: 28px;
+    }
 
+    .comment-form input, .comment-form textarea {
+      padding: 8px;
+    }
 
+    .footer {
+      padding: 20px 0;
+    }
 
+    .footer h4 {
+      margin-bottom: 15px;
+    }
+  }
 
+  /* Memperbaiki form di halaman kontak */
+  .contact-col form {
+    width: 100%;
+  }
 
+  /* Memperbaiki div contact-col yang kosong */
+  .contact-us .row {
+    justify-content: center;
+  }
 
+  /* Memperbaiki responsif peta */
+  .location iframe {
+    height: 300px;
+  }
 
+  /* Transisi navigasi yang lebih baik */
+  .nav-links {
+    transition: 0.5s ease-in-out;
+  }
+
+  /* Perbaikan untuk layout blog */
+  @media(max-width: 768px) {
+    .blog-content .row {
+      flex-direction: column;
+    }
+  }
+  /* Tambahkan kode CSS ini ke akhir file style.css Anda */
+
+/* Styling untuk form kontak */
+.contact-col form {
+    width: 100%;
+}
+
+.contact-col form input, .contact-col form textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 17px;
+    outline: none;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.contact-col form textarea {
+    resize: none;
+}
+
+.contact-col form button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Tambahan untuk responsivitas pada halaman kontak */
+@media(max-width: 700px) {
+    .contact-us .row {
+        flex-direction: column;
+    }
+
+    .contact-col {
+        margin-bottom: 30px;
+    }
+
+    .contact-col form input, .contact-col form textarea {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+}
+
+/* Tambahkan di bagian bawah style.css Anda */
+
+/* Animasi dan transisi untuk tombol menu responsif */
+
+/* Tombol hamburger menu yang muncul saat layar kecil */
+nav .fa {
+    display: none;
+    color: #fff;
+    margin: 10px;
+    font-size: 22px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Memastikan tombol menu tersembunyi secara default pada layar normal */
+.nav-toggle {
+    display: none;
+}
+
+@media(max-width: 700px) {
+    /* Menampilkan tombol menu dengan animasi */
+    nav .fa {
+        display: block;
+        animation: fadeIn 0.5s ease;
+    }
+
+    /* Animasi untuk tombol menu saat dihover */
+    nav .fa:hover {
+        transform: scale(1.1);
+        color: #f44336;
+    }
+
+    /* Memperbaiki transisi menu navigasi saat dibuka/ditutup */
+    .nav-links {
+        position: fixed; /* Menggunakan fixed untuk pengalaman yang lebih baik */
+        background: #f44336;
+        height: 100vh;
+        width: 200px;
+        top: 0;
+        right: -200px;
+        text-align: left;
+        z-index: 2;
+        transition: right 0.5s cubic-bezier(0.77, 0.2, 0.05, 0.85);
+        box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    }
+
+    /* Ketika menu navigasi ditampilkan */
+    .nav-links.show {
+        right: 0;
+    }
+
+    /* Animasi untuk item menu */
+    .nav-links ul li {
+        display: block;
+        margin: 25px 0;
+        opacity: 0;
+        animation: slideIn 0.5s forwards;
+        animation-delay: calc(0.1s * var(--i));
+    }
+}
+
+/* Keyframes untuk animasi fade in */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Keyframes untuk animasi slide in */
+@keyframes slideIn {
+    0% {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
