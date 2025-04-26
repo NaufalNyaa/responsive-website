@@ -33,13 +33,10 @@
 <!---- contact us---->
 
 <section class="location">
-
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6497.7471134570205!2d106.25966538357544!3d-6.1537684220206765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e41f72d3d372e7b%3A0x803b18b0b2d421b4!2sLapangan%20voly%20%26%20Badminton%20perumahan%20senopati%20ciujung!5e1!3m2!1sid!2sid!4v1655279843320!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
 </section>
 
 <section class="contact-us">
-
     <div class="row">
         <div class="contact-col">
             <div>
@@ -64,11 +61,17 @@
                 </span>
             </div>
         </div>
-        <div class="contact-col"></div>
+        <div class="contact-col">
+            <form action="form-handler.php" method="post">
+                <input type="text" name="name" placeholder="Masukkan nama Anda" required>
+                <input type="email" name="email" placeholder="Masukkan alamat email" required>
+                <input type="text" name="subject" placeholder="Masukkan subjek" required>
+                <textarea rows="8" name="message" placeholder="Pesan" required></textarea>
+                <button type="submit" class="hero-btn red-btn">Kirim Pesan</button>
+            </form>
+        </div>
     </div>
-
 </section>
-
 
 <!----- footer ----->
 
@@ -85,17 +88,62 @@
 </section>
 
 <!-----Javascript for Toggle menu----->
-    <script>
-        var navlinks = document.getElementById("navlinks");
-        function showmenu(){
-            navlinks.style.right = "0";
-        }
-        function hidemenu(){
-            navlinks.style.right = "-200px";
-        }
-    </script>
+<script>
+    // Script navigasi mobile yang ditingkatkan
+var navlinks = document.getElementById("navlinks");
+var menuItems = document.querySelectorAll(".nav-links ul li");
 
+function showmenu(){
+    navlinks.style.right = "0";
+    navlinks.classList.add("show");
+    document.body.style.overflow = "hidden"; // Mencegah scrolling saat menu terbuka
 
+    // Menambahkan delay animasi untuk setiap item menu
+    menuItems.forEach(function(item, index) {
+        item.style.setProperty('--i', index + 1);
+        item.style.animation = "slideIn 0.5s forwards";
+        item.style.animationDelay = (0.1 * (index + 1)) + "s";
+    });
+}
 
+function hidemenu(){
+    navlinks.style.right = "-200px";
+    navlinks.classList.remove("show");
+    document.body.style.overflow = "auto"; // Mengaktifkan kembali scrolling saat menu ditutup
+
+    // Reset animasi item menu
+    menuItems.forEach(function(item) {
+        item.style.animation = "none";
+        item.style.opacity = "0";
+    });
+}
+
+// Menutup menu mobile saat mengklik link
+document.querySelectorAll('.nav-links ul li a').forEach(item => {
+  item.addEventListener('click', event => {
+    if(window.innerWidth <= 700) {
+      hidemenu();
+    }
+  });
+});
+
+// Menangani event resize window untuk memperbaiki navigasi
+window.addEventListener('resize', function() {
+  if(window.innerWidth > 700) {
+    navlinks.style.right = "0";
+    document.body.style.overflow = "auto";
+
+    // Reset tampilan item menu pada layar besar
+    menuItems.forEach(function(item) {
+        item.style.opacity = "1";
+        item.style.animation = "none";
+    });
+  } else {
+    if (!navlinks.classList.contains("show")) {
+        navlinks.style.right = "-200px";
+    }
+  }
+});
+</script>
 </body>
 </html>
